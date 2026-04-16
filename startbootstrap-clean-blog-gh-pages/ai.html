@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joke Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: white;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 1.5rem;
+      color: #222;
+    }
+
+    .joke-box {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1.5rem;
+      min-height: 80px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    #setup {
+      font-size: 16px;
+      font-weight: bold;
+      color: #222;
+      margin: 0;
+    }
+
+    #punchline {
+      font-size: 15px;
+      color: #555;
+      margin: 0;
+      display: none;
+    }
+
+    #placeholder {
+      color: #aaa;
+      font-size: 15px;
+      margin: 0;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    button {
+      padding: 10px 22px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #f0f0f0;
+    }
+
+    #revealBtn {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Joke Generator</h1>
+
+    <div class="joke-box">
+      <p id="placeholder">Press the button to get a joke...</p>
+      <p id="setup"></p>
+      <p id="punchline"></p>
+    </div>
+
+    <div class="btn-row">
+      <button id="jokeBtn" onclick="newJoke()">Create a joke</button>
+      <button id="revealBtn" onclick="revealPunchline()">Reveal punchline</button>
+    </div>
+  </div>
+
+  <script>
+    const jokes = [
+      { setup: "Why don't scientists trust atoms?", punchline: "Because they make up everything!" },
+      { setup: "Why did the scarecrow win an award?", punchline: "Because he was outstanding in his field!" },
+      { setup: "I told my wife she was drawing her eyebrows too high.", punchline: "She looked surprised." },
+      { setup: "Why can't you give Elsa a balloon?", punchline: "Because she'll let it go." },
+      { setup: "What do you call cheese that isn't yours?", punchline: "Nacho cheese." },
+      { setup: "Why do cows wear bells?", punchline: "Because their horns don't work!" },
+      { setup: "I asked my dog what two minus two is.", punchline: "He said nothing." },
+      { setup: "Why did the bicycle fall over?", punchline: "Because it was two-tired." },
+      { setup: "What do you call a fake noodle?", punchline: "An impasta." },
+      { setup: "How do you organize a space party?", punchline: "You planet." },
+      { setup: "Why did the math book look so sad?", punchline: "Because it had too many problems." },
+      { setup: "What do you call a sleeping dinosaur?", punchline: "A dino-snore." }
+    ];
+
+    let current = -1;
+
+    function newJoke() {
+      let idx;
+      do { idx = Math.floor(Math.random() * jokes.length); } while (idx === current);
+      current = idx;
+
+      const j = jokes[idx];
+      document.getElementById('placeholder').style.display = 'none';
+      document.getElementById('setup').textContent = j.setup;
+      document.getElementById('punchline').textContent = j.punchline;
+      document.getElementById('punchline').style.display = 'none';
+      document.getElementById('revealBtn').style.display = 'inline-block';
+      document.getElementById('jokeBtn').textContent = 'New joke';
+    }
+
+    function revealPunchline() {
+      document.getElementById('punchline').style.display = 'block';
+      document.getElementById('revealBtn').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
